@@ -79,11 +79,10 @@ class Card extends DAV\File implements ICard, DAVACL\IACL
      * Updates the VCard-formatted object.
      *
      * @param string      $cardData
-     * @param object|null $params
      *
      * @return string|null
      */
-    public function put($cardData, $params = null)
+    public function put($cardData)
     {
         if (is_resource($cardData)) {
             $cardData = stream_get_contents($cardData);

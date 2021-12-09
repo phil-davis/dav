@@ -1117,12 +1117,18 @@ class Server implements LoggerAwareInterface, EmitterInterface
      * @param string      $uri
      * @param resource    $data
      * @param string      $etag
-     * @param object|null $params
      *
      * @return bool
      */
-    public function updateFile($uri, $data, &$etag = null, $params = null)
+    public function updateFile($uri, $data, &$etag = null)
     {
+        // Optional arg $params may be passed by callers
+        if (func_num_args() > 3) {
+            $params = func_get_arg(3);
+        } else {
+            $params = null;
+        }
+
         $node = $this->tree->getNodeForPath($uri);
 
         // It is possible for an event handler to modify the content of the
